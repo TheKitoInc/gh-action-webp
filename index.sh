@@ -15,13 +15,12 @@ git pull || exit 5
 for extension in $(echo "$IMAGE_EXTENSIONS")
 do
     echo "Converting images with extension $extension to WebP format"
-
-    for src in $(find "$PATH_ROOT" -type f -iname "*.$extension")
+    
+    for src in $(find "$PATH_ROOT" -type f -iname "*.$extension" -exec echo "{}" \;)
     do
-        dst=$(echo $src | sed 's/\.[^.]*$//')
+        dst=$(echo "$src" | sed 's/\.[^.]*$//')
         
-
-        if [ ! "$dst" -nt "$src" ]
+        if [ "$src" -nt "$dst" ]
         then
             echo "Converting $src to $dst.webp"
 
