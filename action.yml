@@ -1,0 +1,28 @@
+name: GH-ACTION-WEBP
+branding:
+  icon: trash-2
+  color: red
+description: Create webp images from jpg and png images
+inputs:
+  git-user-email:
+    description: Git user.email to use.
+    default: 41898282+github-actions[bot]@users.noreply.github.com
+  git-user-name:
+    description: Git user.name.
+    default: github-actions[bot]
+  image_extensions:
+    description: Image extensions to convert to webp.
+    required: true
+    default: 'jpg png'
+runs:
+  using: composite
+  steps:
+    - shell: sh
+      run: |
+        git config user.name ${GIT_USER_NAME}
+        git config user.email ${GIT_USER_EMAIL}
+        sh "${{ github.action_path }}/index.sh"
+      env:
+        GIT_USER_NAME: ${{ inputs.git-user-name }}
+        GIT_USER_EMAIL: ${{ inputs.git-user-email }}
+        IMAGE_EXTENSIONS: ${{ inputs.image_extensions }}
