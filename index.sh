@@ -21,7 +21,7 @@ do
         dst=$(echo $src | sed 's/\.[^.]*$//')
         
 
-        if [ "$src" -nt "$dst" ]
+        if [ ! "$dst" -nt "$src" ]
         then
             echo "Converting $src to $dst.webp"
 
