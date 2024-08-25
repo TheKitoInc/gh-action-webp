@@ -13,7 +13,7 @@ inputs:
   image_extensions:
     description: Image extensions to convert to webp.
     required: true
-    default: 'jpg png'
+    default: 'jpg jpeg png'
 runs:
   using: composite
   steps:

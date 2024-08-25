@@ -8,9 +8,9 @@ export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update || exit 3
 sudo apt-get install -y webp || exit 4
 
-#cd "$PATH_ROOT" && \
-#git fetch && \
-#git pull || exit 5
+cd "$PATH_ROOT" && \
+git fetch && \
+git pull || exit 5
 
 for extension in $(echo "$IMAGE_EXTENSIONS")
 do
@@ -28,6 +28,9 @@ do
             cwebp -q 100 "$src" -o "$dst.webp"
         fi        
     done
+
+    git add . && \
+    git commit -m "Convert images with extension $extension to WebP format"
 done
 
-
+git push || exit 7
